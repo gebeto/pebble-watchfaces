@@ -1,6 +1,6 @@
 {
-  "name": "halfy",
-  "author": "MakeAwesomeHappen",
+  "name": "roundy",
+  "author": "gebeto",
   "version": "1.0.0",
   "keywords": [
     "pebble-app"
@@ -9,7 +9,7 @@
   "dependencies": {},
   "pebble": {
     "displayName": "roundy",
-    "uuid": "835cae8b-8efb-409f-a196-02d8fb446fc4",
+    "uuid": "f7a918c9-b08e-46bf-8754-bbc9e1b5ac88",
     "sdkVersion": "3",
     "enableMultiJS": true,
     "targetPlatforms": [

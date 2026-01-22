@@ -1,6 +1,6 @@
 {
-  "name": "halfy",
-  "author": "MakeAwesomeHappen",
+  "name": "roundy-numbers",
+  "author": "gebeto",
   "version": "1.0.0",
   "keywords": [
     "pebble-app"
@@ -8,8 +8,8 @@
   "private": true,
   "dependencies": {},
   "pebble": {
-    "displayName": "roundy",
-    "uuid": "835cae8b-8efb-409f-a196-02d8fb446fc4",
+    "displayName": "roundy-numbers",
+    "uuid": "3f697d53-40e5-483e-a544-e789d15c59a0",
     "sdkVersion": "3",
     "enableMultiJS": true,
     "targetPlatforms": [
