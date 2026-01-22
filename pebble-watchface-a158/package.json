@@ -1,0 +1,57 @@
+{
+  "name": "a158",
+  "author": "gebeto",
+  "version": "1.0.0",
+  "keywords": [
+    "pebble-app"
+  ],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "a158",
+    "uuid": "835cae8b-8efb-409f-a196-02d8fb446fc4",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "aplite",
+      "basalt",
+      "chalk",
+      "diorite",
+      "emery",
+      "flint"
+    ],
+    "watchapp": {
+      "watchface": true
+    },
+    "messageKeys": [
+      "dummy"
+    ],
+    "resources": {
+      "media": [
+        {
+          "type": "font",
+          "name": "CASIO_FONT_12",
+          "file": "casio.ttf"
+        },
+        {
+          "characterRegex": "[0-9a-zA-Z ]",
+          "type": "font",
+          "name": "CASIO_FONT_24",
+          "file": "casio.ttf"
+        },
+        {
+          "characterRegex": "[0-9:APM ]",
+          "type": "font",
+          "name": "CASIO_FONT_30",
+          "file": "casio.ttf"
+        },
+        {
+          "characterRegex": "[0-9:APM ]",
+          "type": "font",
+          "name": "CASIO_FONT_42",
+          "file": "casio.ttf"
+        }
+      ]
+    }
+  }
+}

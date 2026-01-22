@@ -1,0 +1,42 @@
+{
+  "name": "analog-minimaly",
+  "author": "MakeAwesomeHappen",
+  "version": "1.0.0",
+  "keywords": [
+    "pebble-app"
+  ],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "analog-minimaly",
+    "uuid": "835cae8b-8efb-409f-a196-02d8fb446fc4",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "chalk",
+      "basalt",
+      "diorite",
+      "emery"
+    ],
+    "watchapp": {
+      "watchface": true
+    },
+    "messageKeys": [
+      "dummy"
+    ],
+    "resources": {
+      "media": [
+        {
+          "type": "bitmap",
+          "name": "IMAGE_HOURS",
+          "file": "images/hours.png"
+        },
+        {
+          "type": "bitmap",
+          "name": "IMAGE_MINUTES",
+          "file": "images/minutes.png"
+        }
+      ]
+    }
+  }
+}
