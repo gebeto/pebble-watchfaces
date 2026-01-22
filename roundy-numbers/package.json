@@ -23,7 +23,18 @@
       "dummy"
     ],
     "resources": {
-      "media": []
+      "media": [
+        {
+          "type": "bitmap",
+          "name": "IMAGE_HOURS",
+          "file": "images/hours.png"
+        },
+        {
+          "type": "bitmap",
+          "name": "IMAGE_MINUTES",
+          "file": "images/minutes.png"
+        }
+      ]
     }
   }
 }
