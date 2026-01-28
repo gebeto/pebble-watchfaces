@@ -1,0 +1,35 @@
+{
+  "name": "round-mega-mini",
+  "author": "gebeto",
+  "version": "1.0.0",
+  "keywords": [
+    "pebble-app"
+  ],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "round-mega-mini",
+    "uuid": "f7a918c9-b08e-46bf-8754-bbc9e1b5ac88",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "chalk"
+    ],
+    "watchapp": {
+      "watchface": true
+    },
+    "messageKeys": [
+      "dummy"
+    ],
+    "resources": {
+      "media": [
+        {
+          "characterRegex": "[0-9]",
+          "type": "font",
+          "name": "LECO_FONT_55",
+          "file": "./leco1976.ttf"
+        }
+      ]
+    }
+  }
+}
