@@ -40,7 +40,7 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
   GFont font_date = fonts_get_system_font(FONT_KEY_LECO_20_BOLD_NUMBERS);
 
   graphics_context_set_fill_color(ctx, GColorWhite);
-  graphics_fill_rect(ctx, layer_bounds, 0, GCornerNone);
+  graphics_fill_rect(ctx, layer_bounds, layer_bounds.size.w / 2, GCornerNone);
 
   graphics_context_set_text_color(ctx, GColorBlack);
 
