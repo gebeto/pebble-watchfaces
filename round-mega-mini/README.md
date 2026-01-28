@@ -1,4 +1,4 @@
 # pebble-watchface-roundy
 
 
-<img width="180" height="180" alt="Image" src="https://github.com/user-attachments/assets/2d4ee45a-cb46-453e-85e5-8eb7db97e568" />
+<img width="180" height="180" alt="pebble_screenshot_2026-01-28_22-57-14" src="https://github.com/user-attachments/assets/24f2bab3-6733-41aa-899b-c640c8dfa1cb" />
