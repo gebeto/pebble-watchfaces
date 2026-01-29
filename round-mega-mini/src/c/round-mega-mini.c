@@ -1,5 +1,14 @@
 #include <pebble.h>
 
+#define DARK_MODE 0
+#if DARK_MODE
+#define BACKGROUND_COLOR GColorBlack
+#define TEXT_COLOR GColorWhite
+#else
+#define BACKGROUND_COLOR GColorWhite
+#define TEXT_COLOR GColorBlack
+#endif
+
 static Window *s_window;
 static TextLayer *s_text_layer;
 static Layer *s_layer;
@@ -39,10 +48,10 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
   GFont font_minutes = fonts_get_system_font(FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM);
   GFont font_date = fonts_get_system_font(FONT_KEY_LECO_20_BOLD_NUMBERS);
 
-  graphics_context_set_fill_color(ctx, GColorWhite);
+  graphics_context_set_fill_color(ctx, BACKGROUND_COLOR);
   graphics_fill_rect(ctx, layer_bounds, layer_bounds.size.w / 2, GCornerNone);
 
-  graphics_context_set_text_color(ctx, GColorBlack);
+  graphics_context_set_text_color(ctx, TEXT_COLOR);
 
   if (debug)
     graphics_draw_rect(ctx, GRect(0, layer_bounds.size.h / 2 - 1, layer_bounds.size.w, 2));
