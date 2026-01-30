@@ -27,17 +27,13 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
 
   GRect layer_bounds = layer_get_bounds(layer);
 
-  // graphics_context_set_fill_color(ctx, GColorBlack);
-  // graphics_fill_rect(ctx, layer_bounds, 0, GCornerNone);
+  graphics_context_set_fill_color(ctx, GColorBlack);
+  graphics_fill_rect(ctx, layer_bounds, 0, GCornersAll);
 
-  graphics_context_set_fill_color(ctx, GColorWhite);
-  graphics_fill_rect(ctx, layer_bounds, 8, GCornersAll);
-
-  graphics_context_set_text_color(ctx, GColorBlack);
+  graphics_context_set_text_color(ctx, GColorWhite);
   GRect clock_bounds = GRect(layer_bounds.origin.x - 14, layer_bounds.size.h / 2 - 30, layer_bounds.size.w, 64);
   graphics_draw_text(
       ctx, s_time_buffer,
-      // ctx, "00:00",
       s_font_clock,
       GRect(layer_bounds.origin.x + 3, layer_bounds.origin.y - 7, layer_bounds.size.w, layer_bounds.size.h),
       GTextOverflowModeWordWrap, GTextAlignmentLeft, NULL);
