@@ -1,5 +1,3 @@
-# pebble-watchface-a158
+# pebble-watchface-j-mono
 
-Make your pebble same as your favorite Casio A158 Watch
-
-<img width="144" height="168" alt="screenshot" src="https://github.com/user-attachments/assets/fa78ff4e-ccaf-496b-af82-03cf243053bc" />
+<img width="144" height="168" alt="pebble_screenshot_2026-01-30_17-32-41" src="https://github.com/user-attachments/assets/308c60dc-3f22-48c6-8883-5b3e916b2de7" />
