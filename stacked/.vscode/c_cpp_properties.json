@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**",
+                // "~/Library/Application Support/Pebble SDK/SDKs/4.9.77/sdk-core/pebble/chalk/include"
+                "~/Library/Application Support/Pebble SDK/SDKs/4.9.77/sdk-core/pebble/diorite/include"
+            ],
+            "defines": [],
+            "compilerPath": "/opt/homebrew/opt/llvm/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "macos-clang-arm64"
+        }
+    ],
+    "version": 4
+}
