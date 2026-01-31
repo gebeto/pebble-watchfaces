@@ -84,8 +84,7 @@ static Animation *create_open_animation(int delay_ms, GRect opened_bounds, GRect
 static Animation *create_close_open_sequence_animation(GRect opened_bounds, GRect closed_bounds)
 {
   Animation *open_animation = create_open_animation(0, opened_bounds, closed_bounds);
-  Animation *close_animation = create_open_animation(0, closed_bounds, opened_bounds);
-  animation_set_delay(open_animation, 300);
+  Animation *close_animation = create_open_animation(300, closed_bounds, opened_bounds);
 
   return animation_sequence_create(close_animation, open_animation, NULL);
 }
@@ -198,7 +197,7 @@ static void prv_window_load(Window *window)
   // create animations
   if (settings.UseAnimations)
   {
-    s_open_animation = create_open_animation(300, opened_bounds, closed_bounds);
+    s_open_animation = create_open_animation(150, opened_bounds, closed_bounds);
     s_close_open_animation = create_close_open_sequence_animation(opened_bounds, closed_bounds);
   }
   // end create animations
