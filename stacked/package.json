@@ -24,13 +24,14 @@
     ],
     "messageKeys": [
       "BackgroundColor",
-      "ForegroundColor"
+      "ForegroundColor",
+      "UseAnimations"
     ],
     "resources": {
       "media": []
     }
   },
   "dependencies": {
-    "pebble-clay": "^1.0.1"
+    "pebble-clay": "^1.0.4"
   }
 }

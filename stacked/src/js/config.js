@@ -21,6 +21,12 @@ module.exports = [
                 "messageKey": "ForegroundColor",
                 "defaultValue": "0x000000",
                 "label": "Foreground Color"
+            },
+            {
+                "type": "toggle",
+                "messageKey": "UseAnimations",
+                "label": "Animations",
+                "defaultValue": true
             }
         ]
     },

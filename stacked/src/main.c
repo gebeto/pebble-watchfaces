@@ -5,6 +5,7 @@ typedef struct ClaySettings
 {
   GColor BackgroundColor;
   GColor ForegroundColor;
+  bool UseAnimations;
 } __attribute__((__packed__)) ClaySettings;
 
 ClaySettings settings;
@@ -13,6 +14,7 @@ static void prv_default_settings()
 {
   settings.BackgroundColor = GColorWhite;
   settings.ForegroundColor = GColorBlack;
+  settings.UseAnimations = true;
 }
 
 // Read settings from persistent storage
@@ -72,20 +74,20 @@ static void update_screen()
 static Animation *create_open_animation(int delay_ms, GRect opened_bounds, GRect closed_bounds)
 {
   PropertyAnimation *open_prop_anim = property_animation_create_layer_frame(s_before_layer, &closed_bounds, &opened_bounds);
-  Animation *s_open_animation = property_animation_get_animation(open_prop_anim);
-  animation_set_curve(s_open_animation, AnimationCurveEaseOut);
-  animation_set_duration(s_open_animation, 500);
-  animation_set_delay(s_open_animation, delay_ms);
-  return s_open_animation;
+  Animation *open_animation = property_animation_get_animation(open_prop_anim);
+  animation_set_curve(open_animation, AnimationCurveEaseOut);
+  animation_set_duration(open_animation, 500);
+  animation_set_delay(open_animation, delay_ms);
+  return open_animation;
 }
 
 static Animation *create_close_open_sequence_animation(GRect opened_bounds, GRect closed_bounds)
 {
-  Animation *s_open_animation = create_open_animation(0, opened_bounds, closed_bounds);
-  Animation *s_close_animation = create_open_animation(0, closed_bounds, opened_bounds);
-  animation_set_delay(s_open_animation, 300);
+  Animation *open_animation = create_open_animation(0, opened_bounds, closed_bounds);
+  Animation *close_animation = create_open_animation(0, closed_bounds, opened_bounds);
+  animation_set_delay(open_animation, 300);
 
-  return animation_sequence_create(s_close_animation, s_open_animation, NULL);
+  return animation_sequence_create(close_animation, open_animation, NULL);
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
@@ -175,7 +177,7 @@ static void prv_window_load(Window *window)
   GRect closed_bounds = GRect(bounds.origin.x, bounds.origin.y + 42 - 5, bounds.size.w, bounds.size.h);
   GRect opened_bounds = GRect(bounds.origin.x, bounds.origin.y, bounds.size.w, bounds.size.h);
 
-  s_before_layer = layer_create(closed_bounds);
+  s_before_layer = layer_create(settings.UseAnimations ? closed_bounds : opened_bounds);
   s_text_layer = layer_create(GRect(0, 0, bounds.size.w, bounds.size.h));
   s_after_layer = layer_create(GRect(0, 0, bounds.size.w, bounds.size.h));
 
@@ -194,8 +196,11 @@ static void prv_window_load(Window *window)
   layer_mark_dirty(s_text_layer);
 
   // create animations
-  s_open_animation = create_open_animation(300, opened_bounds, closed_bounds);
-  s_close_open_animation = create_close_open_sequence_animation(opened_bounds, closed_bounds);
+  if (settings.UseAnimations)
+  {
+    s_open_animation = create_open_animation(300, opened_bounds, closed_bounds);
+    s_close_open_animation = create_close_open_sequence_animation(opened_bounds, closed_bounds);
+  }
   // end create animations
 
   // start loops
@@ -224,6 +229,12 @@ static void prv_inbox_received_handler(DictionaryIterator *iter, void *context)
   if (fg_color_t)
   {
     settings.ForegroundColor = GColorFromHEX(fg_color_t->value->int32);
+  }
+
+  Tuple *animations_t = dict_find(iter, MESSAGE_KEY_UseAnimations);
+  if (animations_t)
+  {
+    settings.UseAnimations = animations_t->value->int32 == 1;
   }
 
   prv_save_settings();
