@@ -59,11 +59,23 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
 
   if (initial_ticked)
   {
-    animation_set_reverse(s_wrap_animation, true);
     wrap_animation(0);
     unwrap_animation(1000);
   }
   initial_ticked = true;
+}
+
+void draw_card(GContext *ctx, GRect card_bounds_border)
+{
+  GRect card_bounds_inner = GRect(
+      card_bounds_border.origin.x + 2,
+      card_bounds_border.origin.y + 2,
+      card_bounds_border.size.w - 4,
+      70 - 4);
+  graphics_context_set_fill_color(ctx, GColorBlack);
+  graphics_fill_rect(ctx, card_bounds_border, 10, GCornersAll);
+  graphics_context_set_fill_color(ctx, GColorWhite);
+  graphics_fill_rect(ctx, card_bounds_inner, 8, GCornersAll);
 }
 
 static void canvas_update_before_proc(Layer *layer, GContext *ctx)
@@ -75,35 +87,7 @@ static void canvas_update_before_proc(Layer *layer, GContext *ctx)
   int top_gap = 0;
   for (int i = 0; i < hour + 1; i++)
   {
-    GRect card_bounds_border = GRect(1, 2 + top_gap, layer_bounds.size.w - 2, 70);
-    GRect card_bounds_inner = GRect(3, 4 + top_gap, card_bounds_border.size.w - 4, 70 - 4);
-
-    graphics_context_set_fill_color(ctx, GColorBlack);
-    graphics_fill_rect(ctx, card_bounds_border, 10, GCornersAll);
-    graphics_context_set_fill_color(ctx, GColorWhite);
-    graphics_fill_rect(ctx, card_bounds_inner, 8, GCornersAll);
-
-    top_gap += 5;
-  }
-}
-
-static void canvas_update_after_proc(Layer *layer, GContext *ctx)
-{
-  graphics_context_set_antialiased(ctx, true);
-  GRect layer_bounds = layer_get_bounds(layer);
-
-  int hour = tick_time->tm_hour;
-  int top_gap = 42 + 5 * hour;
-  for (int i = hour; i < 23; i++)
-  {
-    GRect card_bounds_border = GRect(1, 2 + top_gap, layer_bounds.size.w - 2, 70);
-    GRect card_bounds_inner = GRect(3, 4 + top_gap, card_bounds_border.size.w - 4, 70 - 4);
-
-    graphics_context_set_fill_color(ctx, GColorBlack);
-    graphics_fill_rect(ctx, card_bounds_border, 10, GCornersAll);
-    graphics_context_set_fill_color(ctx, GColorWhite);
-    graphics_fill_rect(ctx, card_bounds_inner, 8, GCornersAll);
-
+    draw_card(ctx, GRect(1, 5 + top_gap, layer_bounds.size.w - 2, 70));
     top_gap += 5;
   }
 }
@@ -113,16 +97,27 @@ static void canvas_update_text_proc(Layer *layer, GContext *ctx)
 
   GRect layer_bounds = layer_get_bounds(layer);
   GFont font = fonts_get_system_font(FONT_KEY_LECO_42_NUMBERS);
-
   int hour = tick_time->tm_hour;
   int top_gap = 0 + 5 * hour - 2;
-  GRect card_bounds_inner = GRect(3, 4 + top_gap, layer_bounds.size.w - 2 - 4, 70 - 4);
+  GRect card_bounds_inner = GRect(3, 7 + top_gap, layer_bounds.size.w - 2 - 4, 70 - 4);
 
   graphics_context_set_text_color(ctx, GColorBlack);
   graphics_draw_text(
       ctx, s_time_buffer, font,
       GRect(card_bounds_inner.origin.x, card_bounds_inner.origin.y - 5, card_bounds_inner.size.w, card_bounds_inner.size.h),
       GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
+}
+
+static void canvas_update_after_proc(Layer *layer, GContext *ctx)
+{
+  GRect layer_bounds = layer_get_bounds(layer);
+  int hour = tick_time->tm_hour;
+  int top_gap = 42 + 5 * hour;
+  for (int i = hour; i < 23; i++)
+  {
+    draw_card(ctx, GRect(1, 5 + top_gap, layer_bounds.size.w - 2, 70));
+    top_gap += 5;
+  }
 }
 
 // static void accel_tap_handler(AccelAxisType axis, int32_t direction)
