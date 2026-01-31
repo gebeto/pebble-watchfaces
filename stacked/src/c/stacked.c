@@ -10,11 +10,8 @@ static struct tm *tick_time;
 static char s_time_buffer[8] = "00:00";
 static char s_minutes_buffer[8] = "00";
 
-static GRect wrapped_bounds;
-static GRect unwrapped_bounds;
-
-static Animation *s_unwrap_animation;
-static Animation *s_wrap_animation;
+static Animation *s_open_animation;
+static Animation *s_close_open_animation;
 
 int hour = 20;
 
@@ -29,24 +26,27 @@ static void update_time()
   strftime(s_minutes_buffer, sizeof(s_minutes_buffer), "%M", tick_time);
 }
 
-static void unwrap_animation(int delay_ms)
+static Animation *create_open_animation(int delay_ms, GRect opened_bounds, GRect closed_bounds)
 {
-  PropertyAnimation *unwrap_prop_anim = property_animation_create_layer_frame(s_before_layer, &wrapped_bounds, &unwrapped_bounds);
-  s_unwrap_animation = property_animation_get_animation(unwrap_prop_anim);
-  animation_set_curve(s_unwrap_animation, AnimationCurveEaseOut);
-  animation_set_duration(s_unwrap_animation, 500);
-  animation_set_delay(s_unwrap_animation, delay_ms);
-  animation_schedule(s_unwrap_animation);
+  PropertyAnimation *open_prop_anim = property_animation_create_layer_frame(s_before_layer, &closed_bounds, &opened_bounds);
+  Animation *s_open_animation = property_animation_get_animation(open_prop_anim);
+  animation_set_curve(s_open_animation, AnimationCurveEaseOut);
+  animation_set_duration(s_open_animation, 500);
+  animation_set_delay(s_open_animation, delay_ms);
+  return s_open_animation;
 }
 
-static void wrap_animation(int delay_ms)
+static Animation *create_close_open_sequence_animation(GRect opened_bounds, GRect closed_bounds)
 {
-  PropertyAnimation *wrap_prop_anim = property_animation_create_layer_frame(s_before_layer, &unwrapped_bounds, &wrapped_bounds);
-  s_wrap_animation = property_animation_get_animation(wrap_prop_anim);
-  animation_set_curve(s_wrap_animation, AnimationCurveEaseOut);
-  animation_set_duration(s_wrap_animation, 500);
-  animation_set_delay(s_wrap_animation, delay_ms);
-  animation_schedule(s_wrap_animation);
+  Animation *s_open_animation = create_open_animation(0, opened_bounds, closed_bounds);
+  Animation *s_close_animation = create_open_animation(0, closed_bounds, opened_bounds);
+  // animation_set_curve(s_open_animation, AnimationCurveEaseIn);
+  // animation_set_reverse(s_open_animation, true);
+  animation_set_delay(s_open_animation, 300);
+
+  Animation *seq = animation_sequence_create(s_close_animation, s_open_animation, NULL);
+
+  return seq;
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
@@ -59,8 +59,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
 
   if (initial_ticked)
   {
-    wrap_animation(0);
-    unwrap_animation(1000);
+    animation_schedule(animation_clone(s_close_open_animation));
   }
   initial_ticked = true;
 }
@@ -130,10 +129,10 @@ static void prv_window_load(Window *window)
 {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
-  wrapped_bounds = GRect(bounds.origin.x, bounds.origin.y + 42 - 5, bounds.size.w, bounds.size.h);
-  unwrapped_bounds = GRect(bounds.origin.x, bounds.origin.y, bounds.size.w, bounds.size.h);
+  GRect closed_bounds = GRect(bounds.origin.x, bounds.origin.y + 42 - 5, bounds.size.w, bounds.size.h);
+  GRect opened_bounds = GRect(bounds.origin.x, bounds.origin.y, bounds.size.w, bounds.size.h);
 
-  s_before_layer = layer_create(wrapped_bounds);
+  s_before_layer = layer_create(closed_bounds);
   s_text_layer = layer_create(GRect(0, 0, bounds.size.w, bounds.size.h));
   s_after_layer = layer_create(GRect(0, 0, bounds.size.w, bounds.size.h));
 
@@ -150,8 +149,13 @@ static void prv_window_load(Window *window)
   layer_mark_dirty(s_before_layer);
   layer_mark_dirty(s_text_layer);
 
-  unwrap_animation(300);
+  // create animations
+  s_open_animation = create_open_animation(300, opened_bounds, closed_bounds);
+  s_close_open_animation = create_close_open_sequence_animation(opened_bounds, closed_bounds);
+  // end create animations
 
+  // start loops
+  animation_schedule(animation_clone(s_open_animation));
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
   // accel_tap_service_subscribe(accel_tap_handler);
 }
