@@ -8,12 +8,12 @@ static Layer *s_after_layer;
 // Write the current hours and minutes into a buffer
 static struct tm *tick_time;
 static char s_time_buffer[8] = "00:00";
-static char s_minutes_buffer[8] = "00";
+// static char s_time_to_render[8] = clock_copy_time_string(s_time_buffer);
 
 static Animation *s_open_animation;
 static Animation *s_close_open_animation;
 
-int hour = 20;
+int hour = 0;
 
 static bool initial_ticked = false;
 
@@ -21,9 +21,20 @@ static void update_time()
 {
   time_t temp = time(NULL);
   tick_time = localtime(&temp);
+  clock_copy_time_string(s_time_buffer, 8);
+}
 
-  strftime(s_time_buffer, sizeof(s_time_buffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tick_time);
-  strftime(s_minutes_buffer, sizeof(s_minutes_buffer), "%M", tick_time);
+static void update_screen()
+{
+  layer_mark_dirty(s_before_layer);
+  layer_mark_dirty(s_text_layer);
+  layer_mark_dirty(s_after_layer);
+
+  if (initial_ticked)
+  {
+    animation_schedule(animation_clone(s_close_open_animation));
+  }
+  initial_ticked = true;
 }
 
 static Animation *create_open_animation(int delay_ms, GRect opened_bounds, GRect closed_bounds)
@@ -40,28 +51,15 @@ static Animation *create_close_open_sequence_animation(GRect opened_bounds, GRec
 {
   Animation *s_open_animation = create_open_animation(0, opened_bounds, closed_bounds);
   Animation *s_close_animation = create_open_animation(0, closed_bounds, opened_bounds);
-  // animation_set_curve(s_open_animation, AnimationCurveEaseIn);
-  // animation_set_reverse(s_open_animation, true);
   animation_set_delay(s_open_animation, 300);
 
-  Animation *seq = animation_sequence_create(s_close_animation, s_open_animation, NULL);
-
-  return seq;
+  return animation_sequence_create(s_close_animation, s_open_animation, NULL);
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
 {
   update_time();
-
-  layer_mark_dirty(s_before_layer);
-  layer_mark_dirty(s_text_layer);
-  layer_mark_dirty(s_after_layer);
-
-  if (initial_ticked)
-  {
-    animation_schedule(animation_clone(s_close_open_animation));
-  }
-  initial_ticked = true;
+  update_screen();
 }
 
 void draw_card(GContext *ctx, GRect card_bounds_border)
@@ -77,6 +75,14 @@ void draw_card(GContext *ctx, GRect card_bounds_border)
   graphics_fill_rect(ctx, card_bounds_inner, 8, GCornersAll);
 }
 
+static void canvas_update_window_proc(Layer *layer, GContext *ctx)
+{
+  GRect layer_bounds = layer_get_bounds(layer);
+
+  // graphics_context_set_fill_color(ctx, GColorBlack);
+  graphics_context_set_fill_color(ctx, GColorWhite);
+  graphics_fill_rect(ctx, layer_bounds, 0, GCornerNone);
+}
 static void canvas_update_before_proc(Layer *layer, GContext *ctx)
 {
   graphics_context_set_antialiased(ctx, true);
@@ -100,6 +106,7 @@ static void canvas_update_text_proc(Layer *layer, GContext *ctx)
   int top_gap = 0 + 5 * hour - 2;
   GRect card_bounds_inner = GRect(3, 7 + top_gap, layer_bounds.size.w - 2 - 4, 70 - 4);
 
+  // graphics_context_set_text_color(ctx, GColorWhite);
   graphics_context_set_text_color(ctx, GColorBlack);
   graphics_draw_text(
       ctx, s_time_buffer, font,
@@ -119,11 +126,15 @@ static void canvas_update_after_proc(Layer *layer, GContext *ctx)
   }
 }
 
-// static void accel_tap_handler(AccelAxisType axis, int32_t direction)
-// {
-//   wrap_animation(0);
-//   unwrap_animation(1000);
-// }
+static void accel_tap_handler(AccelAxisType axis, int32_t direction)
+{
+  hour += 1;
+  if (hour > 23)
+  {
+    hour = 0;
+  }
+  update_screen();
+}
 
 static void prv_window_load(Window *window)
 {
@@ -138,6 +149,7 @@ static void prv_window_load(Window *window)
 
   update_time();
 
+  layer_set_update_proc(window_layer, canvas_update_window_proc);
   layer_set_update_proc(s_before_layer, canvas_update_before_proc);
   layer_set_update_proc(s_text_layer, canvas_update_text_proc);
   layer_set_update_proc(s_after_layer, canvas_update_after_proc);
