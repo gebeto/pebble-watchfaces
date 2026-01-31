@@ -5,8 +5,6 @@
   "keywords": [
     "pebble-app"
   ],
-  "private": true,
-  "dependencies": {},
   "pebble": {
     "displayName": "stacked",
     "uuid": "835cae8b-8efb-409f-a196-02d8fb446fc4",
@@ -16,18 +14,23 @@
       "aplite",
       "basalt",
       "chalk",
-      "diorite",
-      "emery",
-      "flint"
+      "diorite"
     ],
     "watchapp": {
       "watchface": true
     },
+    "capabilities": [
+      "configurable"
+    ],
     "messageKeys": [
-      "dummy"
+      "BackgroundColor",
+      "ForegroundColor"
     ],
     "resources": {
       "media": []
     }
+  },
+  "dependencies": {
+    "pebble-clay": "^1.0.1"
   }
 }

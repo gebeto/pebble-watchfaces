@@ -1,5 +1,37 @@
 #include <pebble.h>
 
+#define SETTINGS_KEY 1
+typedef struct ClaySettings
+{
+  GColor BackgroundColor;
+  GColor ForegroundColor;
+} __attribute__((__packed__)) ClaySettings;
+
+ClaySettings settings;
+
+static void prv_default_settings()
+{
+  settings.BackgroundColor = GColorWhite;
+  settings.ForegroundColor = GColorBlack;
+}
+
+// Read settings from persistent storage
+static void prv_load_settings()
+{
+  // Load the default settings
+  prv_default_settings();
+  // Read settings from persistent storage, if they exist
+  persist_read_data(SETTINGS_KEY, &settings, sizeof(settings));
+}
+
+// Save the settings to persistent storage
+static void prv_save_settings()
+{
+  persist_write_data(SETTINGS_KEY, &settings, sizeof(settings));
+  // Update the display based on new settings
+  // prv_update_display();
+}
+
 static Window *s_window;
 static Layer *s_before_layer;
 static Layer *s_text_layer;
@@ -69,9 +101,9 @@ void draw_card(GContext *ctx, GRect card_bounds_border)
       card_bounds_border.origin.y + 2,
       card_bounds_border.size.w - 4,
       70 - 4);
-  graphics_context_set_fill_color(ctx, GColorBlack);
+  graphics_context_set_fill_color(ctx, settings.ForegroundColor);
   graphics_fill_rect(ctx, card_bounds_border, 10, GCornersAll);
-  graphics_context_set_fill_color(ctx, GColorWhite);
+  graphics_context_set_fill_color(ctx, settings.BackgroundColor);
   graphics_fill_rect(ctx, card_bounds_inner, 8, GCornersAll);
 }
 
@@ -80,7 +112,7 @@ static void canvas_update_window_proc(Layer *layer, GContext *ctx)
   GRect layer_bounds = layer_get_bounds(layer);
 
   // graphics_context_set_fill_color(ctx, GColorBlack);
-  graphics_context_set_fill_color(ctx, GColorWhite);
+  graphics_context_set_fill_color(ctx, settings.BackgroundColor);
   graphics_fill_rect(ctx, layer_bounds, 0, GCornerNone);
 }
 static void canvas_update_before_proc(Layer *layer, GContext *ctx)
@@ -107,7 +139,7 @@ static void canvas_update_text_proc(Layer *layer, GContext *ctx)
   GRect card_bounds_inner = GRect(3, 7 + top_gap, layer_bounds.size.w - 2 - 4, 70 - 4);
 
   // graphics_context_set_text_color(ctx, GColorWhite);
-  graphics_context_set_text_color(ctx, GColorBlack);
+  graphics_context_set_text_color(ctx, settings.ForegroundColor);
   graphics_draw_text(
       ctx, s_time_buffer, font,
       GRect(card_bounds_inner.origin.x, card_bounds_inner.origin.y - 5, card_bounds_inner.size.w, card_bounds_inner.size.h),
@@ -177,8 +209,32 @@ static void prv_window_unload(Window *window)
   layer_destroy(s_before_layer);
 }
 
+// Handle the response from AppMessage
+static void prv_inbox_received_handler(DictionaryIterator *iter, void *context)
+{
+  // Background Color
+  Tuple *bg_color_t = dict_find(iter, MESSAGE_KEY_BackgroundColor);
+  if (bg_color_t)
+  {
+    settings.BackgroundColor = GColorFromHEX(bg_color_t->value->int32);
+  }
+
+  // Foreground Color
+  Tuple *fg_color_t = dict_find(iter, MESSAGE_KEY_ForegroundColor);
+  if (fg_color_t)
+  {
+    settings.ForegroundColor = GColorFromHEX(fg_color_t->value->int32);
+  }
+
+  prv_save_settings();
+}
+
 static void prv_init(void)
 {
+  prv_load_settings();
+  app_message_register_inbox_received(prv_inbox_received_handler);
+  app_message_open(128, 128);
+
   s_window = window_create();
   window_set_window_handlers(s_window, (WindowHandlers){
                                            .load = prv_window_load,
