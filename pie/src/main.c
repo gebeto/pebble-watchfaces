@@ -37,14 +37,18 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
 
   // minutes
   graphics_context_set_fill_color(ctx, GColorBlack);
-  graphics_fill_radial(ctx, GRect(1, 1, 178, 178), GOvalScaleModeFitCircle, 50, DEG_TO_TRIGANGLE(0), DEG_TO_TRIGANGLE(minutes_rotation));
+  graphics_fill_radial(ctx, GRect(1, 1, layer_bounds.size.w - 2, layer_bounds.size.h - 2), GOvalScaleModeFitCircle, 50, DEG_TO_TRIGANGLE(0), DEG_TO_TRIGANGLE(minutes_rotation));
 
   graphics_context_set_fill_color(ctx, GColorWhite);
-  graphics_fill_circle(ctx, GPoint(90, 90), 50);
+  graphics_fill_circle(ctx, GPoint(layer_bounds.size.w / 2, layer_bounds.size.h / 2), 50);
 
   // hours
   graphics_context_set_fill_color(ctx, GColorBlack);
-  graphics_fill_radial(ctx, GRect(41, 41, 99, 99), GOvalScaleModeFitCircle, 50, DEG_TO_TRIGANGLE(0), DEG_TO_TRIGANGLE(hours_rotation));
+  int rad = 50;
+  int size = rad * 2 - 1;
+  int _x = layer_bounds.size.w / 2 - rad + 1;
+  int _y = layer_bounds.size.h / 2 - rad + 1;
+  graphics_fill_radial(ctx, GRect(_x, _y, size, size), GOvalScaleModeFitCircle, rad, DEG_TO_TRIGANGLE(0), DEG_TO_TRIGANGLE(hours_rotation));
 }
 
 static void prv_window_load(Window *window)

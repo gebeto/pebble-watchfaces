@@ -8,12 +8,13 @@
   "private": true,
   "dependencies": {},
   "pebble": {
-    "uuid": "ebf06f6f-f45b-4e72-bb5d-ad1e0621f043",
+    "uuid": "97566b11-7062-44e3-ad45-7ef83fd47b6c",
     "displayName": "pie",
     "sdkVersion": "3",
     "enableMultiJS": true,
     "targetPlatforms": [
-      "chalk"
+      "chalk",
+      "diorite"
     ],
     "watchapp": {
       "watchface": true
