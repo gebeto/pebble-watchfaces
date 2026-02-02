@@ -14,9 +14,9 @@ function make_screenshot() {
 
 if [ "$1" == 'all' ]; then
     echo "Do All"
-    # for dir in */ ; do
-    #     make_screenshot dir
-    # done
+    for dir in */ ; do
+        make_screenshot dir
+    done
 elif [ -d "$1" ]; then
     make_screenshot $1
 else
