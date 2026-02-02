@@ -1,4 +1,13 @@
 #include <pebble.h>
+#include "config.h"
+
+#if DARK_MODE == 1
+#define BACKGROUND_COLOR GColorWhite
+#define FOREGROUND_COLOR GColorBlack
+#else
+#define BACKGROUND_COLOR GColorBlack
+#define FOREGROUND_COLOR GColorWhite
+#endif
 
 static Window *s_window;
 static TextLayer *s_text_layer;
@@ -32,18 +41,18 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
   int minutes_rotation = 145;
 
   // background
-  graphics_context_set_fill_color(ctx, GColorWhite);
+  graphics_context_set_fill_color(ctx, BACKGROUND_COLOR);
   graphics_fill_rect(ctx, layer_bounds, 0, GCornerNone);
 
   // minutes
-  graphics_context_set_fill_color(ctx, GColorBlack);
+  graphics_context_set_fill_color(ctx, FOREGROUND_COLOR);
   graphics_fill_radial(ctx, GRect(1, 1, layer_bounds.size.w - 2, layer_bounds.size.h - 2), GOvalScaleModeFitCircle, 50, DEG_TO_TRIGANGLE(0), DEG_TO_TRIGANGLE(minutes_rotation));
 
-  graphics_context_set_fill_color(ctx, GColorWhite);
+  graphics_context_set_fill_color(ctx, BACKGROUND_COLOR);
   graphics_fill_circle(ctx, GPoint(layer_bounds.size.w / 2, layer_bounds.size.h / 2), 50);
 
   // hours
-  graphics_context_set_fill_color(ctx, GColorBlack);
+  graphics_context_set_fill_color(ctx, FOREGROUND_COLOR);
   int rad = 50;
   int size = rad * 2 - 1;
   int _x = layer_bounds.size.w / 2 - rad + 1;
