@@ -11,14 +11,15 @@ function make_screenshot() {
     pebble kill
     make run
     sleep 2
-    pebble screenshot assets/screenshot.png --no-open
+    pebble screenshot "assets/screenshot.png" --no-open
 
     echo "#define DARK_MODE 1" > src/config.h
     # pebble kill
     make run
     sleep 2
-    pebble screenshot assets/screenshot~dark.png --no-open
+    pebble screenshot "assets/screenshot~dark.png" --no-open
 
+    pebble kill
     git checkout -- src/config.h
     cd ..
 }
