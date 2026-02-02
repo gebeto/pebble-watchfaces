@@ -1,5 +1,5 @@
 {
-  "name": "roundy",
+  "name": "target",
   "author": "gebeto",
   "version": "1.0.0",
   "keywords": [
@@ -8,8 +8,8 @@
   "private": true,
   "dependencies": {},
   "pebble": {
-    "displayName": "roundy",
-    "uuid": "f7a918c9-b08e-46bf-8754-bbc9e1b5ac88",
+    "displayName": "target",
+    "uuid": "f504340d-9b18-4bee-a1a5-48c0f4c857bc",
     "sdkVersion": "3",
     "enableMultiJS": true,
     "targetPlatforms": [
@@ -18,12 +18,6 @@
     ],
     "watchapp": {
       "watchface": true
-    },
-    "messageKeys": [
-      "dummy"
-    ],
-    "resources": {
-      "media": []
     }
   }
 }
