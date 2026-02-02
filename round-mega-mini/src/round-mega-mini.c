@@ -1,6 +1,6 @@
 #include <pebble.h>
+#include "config.h"
 
-#define DARK_MODE 0
 #if DARK_MODE
 #define BACKGROUND_COLOR GColorBlack
 #define FOREGROUND_COLOR GColorWhite
