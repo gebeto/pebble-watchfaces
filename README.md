@@ -1,7 +1,7 @@
 # pebble-watchfaces
 
 | Watchface       | Screenshot                                                                       |
-|-----------------|----------------------------------------------------------------------------------|
+|-----------------|:--------------------------------------------------------------------------------:|
 | analog-minimaly | <img width="180" height="180" src="analog-minimaly/assets/screenshot.png" />     |
 | halfy           | <img width="144" height="168" src="halfy/assets/screenshot.png" />               |
 | micro-blacks    | <img width="180" height="180" src="micro-blacks/assets/screenshot.png" />        |
