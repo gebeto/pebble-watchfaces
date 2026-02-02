@@ -32,8 +32,13 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
   graphics_context_set_fill_color(ctx, GColorWhite);
   graphics_fill_rect(ctx, layer_bounds, 0, GCornerNone);
 
-  int hours_rotation = s_tick_time->tm_hour * 30 + s_tick_time->tm_min * 0.5;
-  int minutes_rotation = s_tick_time->tm_min * 6;
+  int hours = s_tick_time->tm_hour;
+  int minutes = s_tick_time->tm_min;
+  // int hours_rotation = s_tick_time->tm_hour * 30 + s_tick_time->tm_min * 0.5;
+  // int hours_rotation = s_tick_time->tm_hour * 30;
+  // int hours_rotation = hours * 30 + minutes * 0.5;
+  int hours_rotation = hours * 30;
+  int minutes_rotation = minutes * 6;
 
   GPoint screen_center = GPoint(layer_bounds.size.w / 2, layer_bounds.size.h / 2);
   GRect minutes_bounds = gbitmap_get_bounds(s_minutes_bitmap);
