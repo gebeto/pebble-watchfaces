@@ -6,6 +6,7 @@ static Layer *s_layer;
 
 // Write the current hours and minutes into a buffer
 static struct tm *s_tick_time;
+static char time_str[8] = "00:00";
 
 static void update_time()
 {
@@ -29,11 +30,6 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
   int hours_rotation = s_tick_time->tm_hour * 15;
   int minutes_rotation = s_tick_time->tm_min * 6;
 
-  // Get the bounds of the image
-  // graphics_context_set_compositing_mode(ctx, GCompOpSet);
-  // graphics_draw_rotated_bitmap(ctx, s_hours_bitmap, GPoint(90, 90), DEG_TO_TRIGANGLE(hours_rotation), GPoint(90, 90));
-  // graphics_draw_rotated_bitmap(ctx, s_minutes_bitmap, GPoint(65, 65), DEG_TO_TRIGANGLE(minutes_rotation), GPoint(90, 90));
-
   // background
   graphics_context_set_fill_color(ctx, GColorWhite);
   graphics_fill_rect(ctx, layer_bounds, 0, GCornerNone);
@@ -44,7 +40,8 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
 
   // strptime()
   graphics_context_set_text_color(ctx, GColorWhite);
-  graphics_draw_text(ctx, "12:00", fonts_get_system_font(FONT_KEY_LECO_20_BOLD_NUMBERS), GRect(90 - 30, 90 - 13, 60, 20), GTextOverflowModeFill, GTextAlignmentCenter, NULL);
+  clock_copy_time_string(time_str, 8);
+  graphics_draw_text(ctx, time_str, fonts_get_system_font(FONT_KEY_LECO_20_BOLD_NUMBERS), GRect(90 - 30, 90 - 13, 60, 20), GTextOverflowModeFill, GTextAlignmentCenter, NULL);
 
   // hours
   graphics_context_set_fill_color(ctx, GColorBlack);
