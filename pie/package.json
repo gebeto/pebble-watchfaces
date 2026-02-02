@@ -1,0 +1,22 @@
+{
+  "name": "pie",
+  "author": "gebeto",
+  "version": "1.0.0",
+  "keywords": [
+    "pebble-app"
+  ],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "uuid": "ebf06f6f-f45b-4e72-bb5d-ad1e0621f043",
+    "displayName": "pie",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "chalk"
+    ],
+    "watchapp": {
+      "watchface": true
+    }
+  }
+}

@@ -11,4 +11,4 @@
 | j-mono          | <img width="144" height="168" src="j-mono/assets/screenshot.png" />              |  |
 | roundy          | <img width="180" height="180" src="roundy/assets/screenshot.png" />              |  |
 | a158            | <img width="144" height="168" src="a158/assets/screenshot.png" />                |  |
-
+| pie             | <img width="180" height="180" src="pie/assets/screenshot.png" />                 | <img width="180" height="180" src="pie/assets/screenshot~dark.png" />                  |
