@@ -1,5 +1,13 @@
 #include <pebble.h>
 
+#if defined(PBL_ROUND)
+#define CARDS_SPACING_X 20
+#define CARDS_SPACING_TOP 20
+#else
+#define CARDS_SPACING_X 1
+#define CARDS_SPACING_TOP 5
+#endif
+
 #define SETTINGS_KEY 1
 typedef struct ClaySettings
 {
@@ -125,7 +133,7 @@ static void canvas_update_before_proc(Layer *layer, GContext *ctx)
   int top_gap = 0;
   for (int i = 0; i < hour + 1; i++)
   {
-    draw_card(ctx, GRect(1, 5 + top_gap, layer_bounds.size.w - 2, 70));
+    draw_card(ctx, GRect(CARDS_SPACING_X, CARDS_SPACING_TOP + top_gap, layer_bounds.size.w - (CARDS_SPACING_X * 2), 70));
     top_gap += 5;
   }
 }
@@ -137,7 +145,7 @@ static void canvas_update_text_proc(Layer *layer, GContext *ctx)
   GFont font = fonts_get_system_font(FONT_KEY_LECO_42_NUMBERS);
   int hour = tick_time->tm_hour;
   int top_gap = 0 + 5 * hour - 2;
-  GRect card_bounds_inner = GRect(3, 7 + top_gap, layer_bounds.size.w - 2 - 4, 70 - 4);
+  GRect card_bounds_inner = GRect(3, CARDS_SPACING_TOP + 2 + top_gap, layer_bounds.size.w - 2 - 4, 70 - 4);
 
   // graphics_context_set_text_color(ctx, GColorWhite);
   graphics_context_set_text_color(ctx, settings.ForegroundColor);
@@ -154,7 +162,7 @@ static void canvas_update_after_proc(Layer *layer, GContext *ctx)
   int top_gap = 42 + 5 * hour;
   for (int i = hour; i < 23; i++)
   {
-    draw_card(ctx, GRect(1, 5 + top_gap, layer_bounds.size.w - 2, 70));
+    draw_card(ctx, GRect(CARDS_SPACING_X, CARDS_SPACING_TOP + top_gap, layer_bounds.size.w - (CARDS_SPACING_X * 2), 70));
     top_gap += 5;
   }
 }
