@@ -19,7 +19,7 @@ GFont font_big;
 static struct tm *tick_time;
 static char s_hours_buffer[8] = "00";
 static char s_minutes_buffer[8] = "00";
-static char s_date_buffer[8] = "00 00";
+static char s_date_buffer[8] = "00";
 
 static bool debug = false;
 
@@ -30,7 +30,7 @@ static void update_time()
 
   strftime(s_hours_buffer, sizeof(s_hours_buffer), clock_is_24h_style() ? "%H" : "%I", tick_time);
   strftime(s_minutes_buffer, sizeof(s_minutes_buffer), "%M", tick_time);
-  strftime(s_date_buffer, sizeof(s_date_buffer), "%d %m", tick_time);
+  strftime(s_date_buffer, sizeof(s_date_buffer), "%d", tick_time);
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
@@ -61,13 +61,15 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
   if (debug)
     graphics_draw_rect(ctx, GRect(hours_rect.origin.x, hours_rect.origin.y + 8, hours_rect.size.w, hours_rect.size.h));
 
-  GRect minutes_rect = GRect(layer_bounds.size.w - 47, layer_bounds.size.h / 2 - 17, 50, 20 + 8);
+  GRect minutes_rect = GRect(layer_bounds.size.w - 48, layer_bounds.size.h / 2 - 17, 50, 20 + 8);
   graphics_draw_text(ctx, s_minutes_buffer, font_minutes, minutes_rect, GTextOverflowModeWordWrap, GTextAlignmentLeft, NULL);
   if (debug)
     graphics_draw_rect(ctx, minutes_rect);
 
-  GRect date_rect = GRect(0, layer_bounds.size.h / 2 - 23, 47, 44);
-  graphics_draw_text(ctx, s_date_buffer, font_date, date_rect, GTextOverflowModeWordWrap, GTextAlignmentRight, NULL);
+  // GRect date_rect = GRect(0, layer_bounds.size.h / 2 - 14, 47, 44);
+  // graphics_draw_text(ctx, s_date_buffer, font_date, date_rect, GTextOverflowModeWordWrap, GTextAlignmentRight, NULL);
+  GRect date_rect = GRect(0, layer_bounds.size.h / 2 - 17, 47, 44);
+  graphics_draw_text(ctx, s_date_buffer, font_minutes, date_rect, GTextOverflowModeWordWrap, GTextAlignmentRight, NULL);
   if (debug)
     graphics_draw_rect(ctx, date_rect);
 }
