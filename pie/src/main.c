@@ -2,11 +2,11 @@
 #include "config.h"
 
 #if DARK_MODE == 1
-#define BACKGROUND_COLOR GColorWhite
-#define FOREGROUND_COLOR GColorBlack
-#else
 #define BACKGROUND_COLOR GColorBlack
 #define FOREGROUND_COLOR GColorWhite
+#else
+#define BACKGROUND_COLOR GColorWhite
+#define FOREGROUND_COLOR GColorBlack
 #endif
 
 static Window *s_window;
@@ -37,8 +37,8 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
 
   int hours_rotation = s_tick_time->tm_hour * 15;
   // int hours_rotation = 350;
-  // int minutes_rotation = s_tick_time->tm_min * 6;
-  int minutes_rotation = 145;
+  int minutes_rotation = s_tick_time->tm_min * 6;
+  // int minutes_rotation = 145;
 
   // background
   graphics_context_set_fill_color(ctx, BACKGROUND_COLOR);
