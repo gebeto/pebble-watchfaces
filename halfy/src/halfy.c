@@ -1,4 +1,13 @@
 #include <pebble.h>
+#include "config.h"
+
+#if DARK_MODE
+#define BACKGROUND_COLOR GColorBlack
+#define FOREGROUND_COLOR GColorWhite
+#else
+#define BACKGROUND_COLOR GColorWhite
+#define FOREGROUND_COLOR GColorBlack
+#endif
 
 static Window *s_window;
 static TextLayer *s_text_layer;
@@ -30,6 +39,9 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
   graphics_context_set_antialiased(ctx, true);
 
   GRect layer_bounds = layer_get_bounds(layer);
+  graphics_context_set_fill_color(ctx, BACKGROUND_COLOR);
+  graphics_fill_rect(ctx, layer_bounds, 0, GCornerNone);
+
   // GFont font = fonts_get_system_font(FONT_KEY_LECO_42_NUMBERS);
   GFont font = fonts_get_system_font(FONT_KEY_LECO_20_BOLD_NUMBERS);
   // GFont font = fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD);
@@ -42,14 +54,14 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
   int hours = tick_time->tm_hour;
   int hours_top_spacing = single_hour_section_height * hours;
   GRect left_rect = GRect(0, hours_top_spacing, layer_bounds.size.w / 2, layer_bounds.size.h - hours_top_spacing);
-  graphics_context_set_fill_color(ctx, GColorBlack);
+  graphics_context_set_fill_color(ctx, FOREGROUND_COLOR);
   graphics_fill_rect(ctx, left_rect, 0, GCornerNone);
 
-  graphics_context_set_text_color(ctx, GColorWhite);
+  graphics_context_set_text_color(ctx, BACKGROUND_COLOR);
   if (left_rect.size.h < text_size.h * 2 + text_gap)
   {
     left_rect.origin.y = left_rect.origin.y - text_size.h - text_gap - 4;
-    graphics_context_set_text_color(ctx, GColorBlack);
+    graphics_context_set_text_color(ctx, FOREGROUND_COLOR);
   }
   else
   {
@@ -63,13 +75,13 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
   // int minutes = 40;
   int minutes_top_spacing = single_minutes_section_height * minutes;
   GRect right_rect = GRect(layer_bounds.size.w / 2, minutes_top_spacing, layer_bounds.size.w / 2, layer_bounds.size.h - minutes_top_spacing);
-  graphics_context_set_fill_color(ctx, GColorBlack);
+  graphics_context_set_fill_color(ctx, FOREGROUND_COLOR);
   graphics_fill_rect(ctx, right_rect, 0, GCornerNone);
-  graphics_context_set_text_color(ctx, GColorWhite);
+  graphics_context_set_text_color(ctx, BACKGROUND_COLOR);
   if (right_rect.size.h < text_size.h * 2 + text_gap)
   {
     right_rect.origin.y = right_rect.origin.y - text_size.h - text_gap - 4;
-    graphics_context_set_text_color(ctx, GColorBlack);
+    graphics_context_set_text_color(ctx, FOREGROUND_COLOR);
   }
   else
   {
