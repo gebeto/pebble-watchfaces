@@ -2,7 +2,7 @@
 
 | Watchface       | Light Screenshot                                                                       | Dark Screenshot |
 |-----------------|:--------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|
-| stacked         | <img width="144" height="168" src="stacked/assets/screenshot.png" />             |  |
+| stacked         | <img width="144" height="168" src="stacked/assets/screenshot.png" />             | <img width="144" height="168" src="stacked/assets/screenshot~dark.png" /> |
 | halfy           | <img width="144" height="168" src="halfy/assets/screenshot.png" />               | <img width="144" height="168" src="halfy/assets/screenshot~dark.png" /> |
 | round-mega-mini | <img width="180" height="180" src="round-mega-mini/assets/screenshot.png" />     | <img width="180" height="180" src="round-mega-mini/assets/screenshot~dark.png" /> |
 | analog-minimaly | <img width="180" height="180" src="analog-minimaly/assets/screenshot.png" />     |  |
