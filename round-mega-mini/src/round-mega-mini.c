@@ -3,10 +3,10 @@
 #define DARK_MODE 0
 #if DARK_MODE
 #define BACKGROUND_COLOR GColorBlack
-#define TEXT_COLOR GColorWhite
+#define FOREGROUND_COLOR GColorWhite
 #else
 #define BACKGROUND_COLOR GColorWhite
-#define TEXT_COLOR GColorBlack
+#define FOREGROUND_COLOR GColorBlack
 #endif
 
 static Window *s_window;
@@ -51,7 +51,7 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
   graphics_context_set_fill_color(ctx, BACKGROUND_COLOR);
   graphics_fill_rect(ctx, layer_bounds, layer_bounds.size.w / 2, GCornerNone);
 
-  graphics_context_set_text_color(ctx, TEXT_COLOR);
+  graphics_context_set_text_color(ctx, FOREGROUND_COLOR);
 
   if (debug)
     graphics_draw_rect(ctx, GRect(0, layer_bounds.size.h / 2 - 1, layer_bounds.size.w, 2));
