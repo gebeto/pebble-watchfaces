@@ -1,6 +1,9 @@
 # pebble-watchface-round-mega-mini
 
 
+<img width="180" height="180" src="assets/screenshot.png" />
+
+
 | Theme            | Screenshot |
 | ---------------- | :------: |
 | <h3>Dark</h3>  | <img width="180" height="180" alt="pebble_screenshot_2026-01-29_10-19-49" src="https://github.com/user-attachments/assets/a0bc0bbb-98ec-457b-afd8-bb703987ae30" /> |
