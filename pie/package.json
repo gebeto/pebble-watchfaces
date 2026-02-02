@@ -18,6 +18,9 @@
     ],
     "watchapp": {
       "watchface": true
+    },
+    "resources": {
+      "media": []
     }
   }
 }
