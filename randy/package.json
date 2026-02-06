@@ -1,0 +1,35 @@
+{
+  "name": "randy",
+  "author": "gebeto",
+  "version": "1.0.0",
+  "keywords": [
+    "pebble-app"
+  ],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "randy",
+    "uuid": "2e17d4f3-ea14-4f41-882c-9aadc8ee6575",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "chalk",
+      "diorite"
+    ],
+    "watchapp": {
+      "watchface": true
+    },
+    "messageKeys": [
+      "dummy"
+    ],
+    "resources": {
+      "media": [
+        {
+          "type": "bitmap",
+          "name": "IMAGE_BACKGROUND",
+          "file": "images/randy.png"
+        }
+      ]
+    }
+  }
+}

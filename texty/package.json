@@ -1,0 +1,35 @@
+{
+  "name": "texty",
+  "author": "gebeto",
+  "version": "1.0.0",
+  "keywords": [
+    "pebble-app"
+  ],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "texty",
+    "uuid": "24adc54e-614a-418f-8e6b-0cc8d7ddfbf5",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "chalk",
+      "diorite"
+    ],
+    "watchapp": {
+      "watchface": true
+    },
+    "messageKeys": [
+      "dummy"
+    ],
+    "resources": {
+      "media": [
+        {
+          "type": "bitmap",
+          "name": "IMAGE_BACKGROUND",
+          "file": "images/texty.png"
+        }
+      ]
+    }
+  }
+}
