@@ -27,7 +27,7 @@
         {
           "type": "bitmap",
           "name": "IMAGE_BACKGROUND",
-          "file": "images/randy.png"
+          "file": "images/background.png"
         }
       ]
     }
