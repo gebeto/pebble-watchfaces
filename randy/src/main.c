@@ -34,9 +34,6 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
 
   graphics_context_set_fill_color(ctx, GColorBlack);
   graphics_fill_rect(ctx, layer_bounds, 0, GCornerNone);
-
-  // Get the bounds of the image
-  graphics_context_set_compositing_mode(ctx, GCompOpSet);
   graphics_draw_bitmap_in_rect(ctx, s_background_bitmap, layer_bounds);
 
   int seconds = s_tick_time->tm_sec;
