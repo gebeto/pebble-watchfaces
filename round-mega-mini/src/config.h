@@ -1,1 +1,1 @@
-#define DARK_MODE 0
+#define DARK_MODE 1
