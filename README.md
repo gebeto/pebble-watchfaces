@@ -12,5 +12,5 @@
 | target          | <img width="180" height="180" src="target/assets/screenshot.png" />              |  |
 | a158            | <img width="144" height="168" src="a158/assets/screenshot.png" />                |  |
 | pie             | <img width="180" height="180" src="pie/assets/screenshot.png" />                 | <img width="180" height="180" src="pie/assets/screenshot~dark.png" />        |
-| essencials      | <img width="180" height="180" src="essencials/assets/screenshot.png" />          | <img width="180" height="180" src="essencials/assets/screenshot~dark.png" /> |
+| essencials      | <img width="180" height="180" src="essentials/assets/screenshot.png" />          | <img width="180" height="180" src="essentials/assets/screenshot~dark.png" /> |
 | randy           | <img width="180" height="180" src="randy/assets/screenshot.png" />               |  |
