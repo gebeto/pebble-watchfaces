@@ -93,7 +93,8 @@ static void prv_window_unload(Window *window)
 static void prv_init(void)
 {
   s_window = window_create();
-  font_big = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_LECO_FONT_55));
+  // font_big = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_LECO_FONT_55));
+  font_big = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_COFFEE_SPARK_FONT_55));
   font_small = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_LECO_FONT_16));
   window_set_window_handlers(s_window, (WindowHandlers){
                                            .load = prv_window_load,

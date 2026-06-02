@@ -30,6 +30,12 @@
           "file": "./leco1976.ttf"
         },
         {
+          "characterRegex": "[ :0-9a-zA-Z]",
+          "type": "font",
+          "name": "COFFEE_SPARK_FONT_55",
+          "file": "./coffee_spark.ttf"
+        },
+        {
           "characterRegex": "[:0-9]",
           "type": "font",
           "name": "LECO_FONT_55",
