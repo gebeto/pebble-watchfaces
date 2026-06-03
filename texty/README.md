@@ -1,5 +1,6 @@
 # pebble-watchface-texty
 
-# !!! WIP
 
-<img width="180" height="180" src="assets/screenshot.png" />
+| Theme            | Light | Dark |
+| ---------------- | :------: | :------: |
+| texty  | <img src="./assets/screenshot.png" /> |  |

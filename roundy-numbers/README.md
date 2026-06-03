@@ -1,4 +1,6 @@
-# pebble-watchface-roundy
+# pebble-watchface-roundy-numbers
 
 
-<img width="180" height="180" src="assets/screenshot.png" />
+| Theme            | Light | Dark |
+| ---------------- | :------: | :------: |
+| roundy-numbers  | <img src="./assets/screenshot.png" /> |  |

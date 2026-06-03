@@ -1,4 +1,6 @@
-# pebble-watchface-roundy
+# pebble-watchface-analog-minimaly
 
 
-<img width="180" height="180" alt="Image" src="assets/screenshot.png" />
+| Theme            | Light | Dark |
+| ---------------- | :------: | :------: |
+| analog-minimaly  | <img src="./assets/screenshot.png" /> |  |

@@ -1,4 +1,6 @@
 # pebble-watchface-pie
 
-<img width="180" height="180" src="assets/screenshot.png" />
-<img width="180" height="180" src="assets/screenshot~dark.png" />
+
+| Theme            | Light | Dark |
+| ---------------- | :------: | :------: |
+| pie  | <img src="./assets/screenshot.png" /> | <img src="./assets/screenshot~dark.png" /> |

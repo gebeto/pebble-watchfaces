@@ -1,4 +1,6 @@
-# pebble-watchface-roundy
+# pebble-watchface-target
 
 
-<img width="180" height="180" src="assets/screenshot.png" />
+| Theme            | Light | Dark |
+| ---------------- | :------: | :------: |
+| target  | <img src="./assets/screenshot.png" /> |  |

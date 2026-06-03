@@ -1,4 +1,6 @@
 # pebble-watchface-randy
 
 
-<img width="180" height="180" src="assets/screenshot.png" />
+| Theme            | Light | Dark |
+| ---------------- | :------: | :------: |
+| randy  | <img src="./assets/screenshot.png" /> |  |

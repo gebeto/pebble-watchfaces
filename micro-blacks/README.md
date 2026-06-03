@@ -1,3 +1,6 @@
-# pebble-watchface-roundy
+# pebble-watchface-micro-blacks
 
-<img width="180" height="180" src="assets/screenshot.png" />
+
+| Theme            | Light | Dark |
+| ---------------- | :------: | :------: |
+| micro-blacks  | <img src="./assets/screenshot.png" /> |  |

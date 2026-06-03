@@ -1,4 +1,6 @@
-# pebble-halfy-watchface
+# pebble-watchface-halfy
 
 
-<img width="144" height="168" alt="screenshot" src="assets/screenshot.png" />
+| Theme            | Light | Dark |
+| ---------------- | :------: | :------: |
+| halfy  | <img src="./assets/screenshot.png" /> | <img src="./assets/screenshot~dark.png" /> |

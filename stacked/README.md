@@ -1,4 +1,6 @@
-# Pebble Stacked Watchface
+# pebble-watchface-stacked
 
 
-<img width="144" height="168" src="assets/screenshot.png" />
+| Theme            | Light | Dark |
+| ---------------- | :------: | :------: |
+| stacked  | <img src="./assets/screenshot.png" /> | <img src="./assets/screenshot~dark.png" /> |
