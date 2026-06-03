@@ -8,7 +8,7 @@
   "private": true,
   "dependencies": {},
   "pebble": {
-    "displayName": "j-mono",
+    "displayName": "J-Mono",
     "uuid": "835cae8b-8efb-409f-a196-02d8fb446fc4",
     "sdkVersion": "3",
     "enableMultiJS": true,

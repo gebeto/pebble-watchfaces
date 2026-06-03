@@ -8,7 +8,7 @@
   "private": true,
   "dependencies": {},
   "pebble": {
-    "displayName": "essentiale",
+    "displayName": "Essentiale",
     "uuid": "f7a918c9-b08e-46bf-8754-bbc9e1b5ac88",
     "sdkVersion": "3",
     "enableMultiJS": true,
