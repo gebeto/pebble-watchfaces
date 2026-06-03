@@ -1,5 +1,5 @@
 {
-  "name": "essentials",
+  "name": "essentiale",
   "author": "gebeto",
   "version": "1.0.0",
   "keywords": [
@@ -8,7 +8,7 @@
   "private": true,
   "dependencies": {},
   "pebble": {
-    "displayName": "essentials",
+    "displayName": "essentiale",
     "uuid": "f7a918c9-b08e-46bf-8754-bbc9e1b5ac88",
     "sdkVersion": "3",
     "enableMultiJS": true,
@@ -28,12 +28,6 @@
           "type": "font",
           "name": "LECO_FONT_16",
           "file": "./leco1976.ttf"
-        },
-        {
-          "characterRegex": "[ :0-9a-zA-Z]",
-          "type": "font",
-          "name": "COFFEE_SPARK_FONT_55",
-          "file": "./coffee_spark.ttf"
         },
         {
           "characterRegex": "[:0-9]",

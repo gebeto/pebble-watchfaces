@@ -1,5 +1,4 @@
-# pebble-watchface-essentials
-
+# pebble-watchface-essentiale
 
 
 | Theme            | Screenshot |

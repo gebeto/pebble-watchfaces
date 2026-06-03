@@ -18,9 +18,9 @@ GFont font_small;
 
 // Write the current hours and minutes into a buffer
 static struct tm *tick_time;
-static char s_week_buffer[20] = "2026\nJune";
+static char s_week_buffer[20] = "2026\nTuesday";
 static char s_hours_buffer[8] = "00:00";
-static char s_date_buffer[20] = "Tuesday\n12";
+static char s_date_buffer[20] = "Sep\n12";
 
 static bool debug = false;
 
@@ -29,9 +29,9 @@ static void update_time()
   time_t temp = time(NULL);
   tick_time = localtime(&temp);
 
-  strftime(s_date_buffer, sizeof(s_date_buffer), "%Y%n%b", tick_time);
+  strftime(s_date_buffer, sizeof(s_date_buffer), "%a%n%Y", tick_time);
   strftime(s_hours_buffer, sizeof(s_hours_buffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tick_time);
-  strftime(s_week_buffer, sizeof(s_week_buffer), "%a%n%e", tick_time);
+  strftime(s_week_buffer, sizeof(s_week_buffer), "%b%n%e", tick_time);
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
@@ -93,8 +93,7 @@ static void prv_window_unload(Window *window)
 static void prv_init(void)
 {
   s_window = window_create();
-  // font_big = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_LECO_FONT_55));
-  font_big = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_COFFEE_SPARK_FONT_55));
+  font_big = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_LECO_FONT_55));
   font_small = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_LECO_FONT_16));
   window_set_window_handlers(s_window, (WindowHandlers){
                                            .load = prv_window_load,
