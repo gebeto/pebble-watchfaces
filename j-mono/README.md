@@ -1,6 +1,5 @@
 # pebble-watchface-j-mono
 
-# pebble-watchface-round-mega-mini
 
 | Theme            | Light | Dark |
 | ---------------- | :------: | :------: |
