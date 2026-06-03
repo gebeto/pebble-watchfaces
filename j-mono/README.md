@@ -1,3 +1,7 @@
 # pebble-watchface-j-mono
 
-<img width="144" height="168" src="assets/screenshot.png" />
+# pebble-watchface-round-mega-mini
+
+| Theme            | Light | Dark |
+| ---------------- | :------: | :------: |
+| J-Mono  | <img src="./assets/screenshot.png" /> | <img src="./assets/screenshot~dark.png" /> |

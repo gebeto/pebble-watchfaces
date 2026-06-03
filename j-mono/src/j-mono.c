@@ -1,4 +1,13 @@
 #include <pebble.h>
+#include "config.h"
+
+#if DARK_MODE
+#define BACKGROUND_COLOR GColorBlack
+#define FOREGROUND_COLOR GColorWhite
+#else
+#define BACKGROUND_COLOR GColorWhite
+#define FOREGROUND_COLOR GColorBlack
+#endif
 
 static Window *s_window;
 static TextLayer *s_text_layer;
@@ -27,10 +36,10 @@ static void canvas_update_proc(Layer *layer, GContext *ctx)
 
   GRect layer_bounds = layer_get_bounds(layer);
 
-  graphics_context_set_fill_color(ctx, GColorBlack);
+  graphics_context_set_fill_color(ctx, BACKGROUND_COLOR);
   graphics_fill_rect(ctx, layer_bounds, 0, GCornersAll);
 
-  graphics_context_set_text_color(ctx, GColorWhite);
+  graphics_context_set_text_color(ctx, FOREGROUND_COLOR);
   GRect clock_bounds = GRect(layer_bounds.origin.x - 14, layer_bounds.size.h / 2 - 30, layer_bounds.size.w, 64);
   graphics_draw_text(
       ctx, s_time_buffer,
